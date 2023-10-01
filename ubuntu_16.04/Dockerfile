@@ -1,0 +1,33 @@
+FROM ubuntu:16.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV TZ Asia/Seoul
+ENV PYTHONIOENCODING UTF-8
+ENV LC_CTYPE C.UTF-8
+
+WORKDIR /root
+
+RUN apt update && apt install -y netcat
+RUN apt update && apt install vim git gcc ssh curl wget gdb sudo python3 python3-dev python3-pip libffi-dev build-essential libssl-dev libc6-i386 libc6-dbg gcc-multilib make -y
+
+RUN dpkg --add-architecture i386
+RUN apt update
+RUN apt install libc6:i386 -y
+
+RUN pip3 install unicorn
+RUN pip3 install keystone-engine
+RUN pip3 install -U pip==20.3.4
+RUN pip3 install -U pwntools
+RUN pip3 install capstone ropper
+RUN pip3 install ropgadget
+RUN apt install libcapstone-dev -y
+
+RUN git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit
+
+RUN git clone https://github.com/scwuaptx/Pwngdb.git && cp ~/Pwngdb/.gdbinit ~/
+
+RUN apt-get install software-properties-common -y
+RUN apt-add-repository -y ppa:rael-gc/rvm -y
+RUN apt-get update -y
+RUN apt-get install rvm -y
