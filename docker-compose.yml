@@ -1,0 +1,18 @@
+version: "3"
+services:
+  Ubuntu_16.04:
+    build:
+      context: .
+      dockerfile: Dockerfile.16.04
+  Ubuntu_18.04:
+    build:
+      context: .
+      dockerfile: Dockerfile.18.04
+  Ubuntu_20.04:
+    build:
+      context: .
+      dockerfile: Dockerfile.20.04
+  Ubuntu_22.04:
+    build:
+      context: .
+      dockerfile: Dockerfile.22.04
