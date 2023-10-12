@@ -29,3 +29,5 @@ WORKDIR /root
 
 RUN apt install ruby-full -y
 RUN gem install one_gadget seccomp-tools
+
+CMD bash
